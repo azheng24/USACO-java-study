@@ -1,0 +1,43 @@
+/* Use the slash-star style comments or the system won't see your
+   identification information */
+/*
+ID: azheng21
+LANG: JAVA
+TASK: ride
+*/
+// Create a program that take two strings: comet and group. If the mod 47 of these are the same, print go, else, print stop
+// Check decription for more detailed explanation
+// Created: Apr 13 2020
+import java.io.*;
+import java.util.*;
+
+class ride {
+  public static void main (String [] args) throws IOException {
+    // Use BufferedReader rather than RandomAccessFile; it's much faster
+    BufferedReader f = new BufferedReader(new FileReader("ride.in"));
+                                                  // input file name goes above
+    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("ride.out")));
+    // Use StringTokenizer vs. readLine/split -- lots faster
+    StringTokenizer st = new StringTokenizer(f.readLine());
+    StringTokenizer st2 = new StringTokenizer(f.readLine());
+    // create variables
+    String comet = (st.nextToken());
+    String group = (st2.nextToken());
+    int groupProduct = 1;
+    int cometProduct = 1;
+    // calculate the total of these numbers
+    for (int i = 0; i < comet.length(); i++) {
+        cometProduct = cometProduct*(comet.charAt(i) - 'A' + 1);
+    }
+    for (int j = 0; j < group.length(); j++) {
+        groupProduct = groupProduct*(group.charAt(j) - 'A' + 1);
+    }
+    // check mod 47 and print out results
+    if (cometProduct % 47 == groupProduct % 47) {
+        out.println("GO");
+    } else {
+        out.println("STAY");
+    }
+    out.close();
+  }
+}
