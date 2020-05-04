@@ -1,0 +1,102 @@
+/* Use the slash-star style comments or the system won't see your
+   identification information */
+/*
+ID: azheng21
+LANG: JAVA
+TASK: gift1
+*/
+// Explanation: Check official USACO website at https://train.usaco.org/usacogate
+/*
+A group of NP (2 ≤ NP ≤ 10) uniquely named friends has decided to exchange gifts of money. Each of these friends might or might not give some money to some or all of the other friends (although some might be cheap and give to no one). Likewise, each friend might or might not receive money from any or all of the other friends. Your goal is to deduce how much more money each person receives than they give.
+
+The rules for gift-giving are potentially different than you might expect. Each person goes to the bank (or any other source of money) to get a certain amount of money to give and divides this money evenly among all those to whom he or she is giving a gift. No fractional money is available, so dividing 7 among 2 friends would be 3 each for the friends with 1 left over – that 1 left over goes into the giver's "account". All the participants' gift accounts start at 0 and are decreased by money given and increased by money received.
+
+In any group of friends, some people are more giving than others (or at least may have more acquaintances) and some people have more money than others.
+
+Given:
+
+- a group of friends, no one of whom has a name longer than 14 characters,
+- the money each person in the group spends on gifts, and
+- a (sub)list of friends to whom each person gives gifts,
+- determine how much money each person ends up with.
+*/
+// Created: Apr 27 2020
+import java.io.*;
+import java.util.*;
+
+class gift1 {
+  public static void main (String [] args) throws IOException {
+    // Use BufferedReader rather than RandomAccessFile; it's much faster
+    BufferedReader f = new BufferedReader(new FileReader("gift1.in"));
+    // input file name goes above
+    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("gift1.out")));
+    // Read how many people are in the game
+    StringTokenizer np1 = new StringTokenizer(f.readLine());
+    String np2 = (np1.nextToken());
+    int people = Integer.parseInt(np2);
+    // create 2 arrays
+    String[] arrPeople = new String[people];
+    int[] arrAmount = new int[people];
+
+    // loop to put all the people in a string array
+    for (int i = 0; i < people; i++) {
+      StringTokenizer person1 = new StringTokenizer(f.readLine());
+      String person = (person1.nextToken());
+      arrPeople[i] = person;
+    }
+
+    // assign 0 to each value in the amount array
+    for (int i = 0; i < people; i++) {
+      arrAmount[i] = 0;
+    }
+
+    int index;
+    int index2 = 0;
+    int amountGiven;
+    int peopleGiven;
+
+    // whole loop
+    for (int i = 0; i < people; i++) {
+      StringTokenizer giver1 = new StringTokenizer(f.readLine());
+      String giver = (giver1.nextToken());
+
+    // amount of money giver gives and amount of people
+      StringTokenizer amount1  = new StringTokenizer(f.readLine());
+      amountGiven = Integer.parseInt(amount1.nextToken());
+      peopleGiven = Integer.parseInt(amount1.nextToken());
+
+      // loop the people that the giver is going to give
+      for (int j = 0; j < peopleGiven; j++) {
+        StringTokenizer current1 = new StringTokenizer(f.readLine());
+        String currentPerson = (current1.nextToken());
+        for (int k = 0; k < people; k++) {
+          if (arrPeople[k].equals(currentPerson)) {
+            index = k;
+            if (amountGiven != 0 || peopleGiven != 0)
+              arrAmount[index] = arrAmount[index] + (amountGiven/peopleGiven);
+            break;
+          }
+        }
+      }
+
+      if (amountGiven == 0 || peopleGiven == 0) {
+        continue;
+      }
+
+      for (int k = 0; k < people; k++) {
+        if (giver.equals(arrPeople[k])) {
+          index2 = k;
+          break;
+        }
+      }
+      arrAmount[index2] = arrAmount[index2] + (amountGiven % peopleGiven);
+      arrAmount[index2] = arrAmount[index2] - amountGiven;
+    }
+    for (int l = 0; l < people; l++) {
+      out.println(arrPeople[l] + " " + arrAmount[l]);
+    }
+
+
+    out.close();
+  }
+}
