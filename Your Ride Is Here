@@ -7,7 +7,7 @@ TASK: ride
 */
 // Create a program that take two strings: comet and group. If the mod 47 of these are the same, print go, else, print stop
 // Check decription for more detailed explanation
-// Created: Apr 13 2020
+// Created: Apr 23 2020
 import java.io.*;
 import java.util.*;
 
