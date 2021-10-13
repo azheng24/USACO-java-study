@@ -1,6 +1,6 @@
-# USACO-java-study
-My journey of going through the USACO website.
-Files
-  2019 - USACO training page, problems done in 2019
-  Bronze - Current prolems
+# USACO study
+### My journey in USCAO. Description of the files below:
+   * Training_Page - USACO training page, 2019
+   * Bronze - **Current study**, 2021
+     * Guide - https://usaco.guide/ 
   
